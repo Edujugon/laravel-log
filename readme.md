@@ -111,14 +111,14 @@ Edujugon\Log\Log object fileName($name)
 
 #### write
 
-`write` method writes the title and lines in log file.
+`write` method writes in log file.
 
->   If pass the title as parameter it will override the previous value passed by above `title` method.
+>   If passed number of days it will register a daily file log handler.
 
 **Syntax**
 
 ```php
-boolean write($title = null)
+boolean write($days = 0)
 ```
 
 ##  Usage samples

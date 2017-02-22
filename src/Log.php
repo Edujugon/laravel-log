@@ -144,36 +144,40 @@ class Log
 
     /**
      * Write in log file.
-     * @param null $title
+     * @param int|null $days
      * @return bool
      */
-    function write($title = null)
+    function write($days = 0)
     {
-        $title = $title ? $title :  $this->title;
-
-        $this->log = new Writer(new Logger($this->loggerName));
-
-        $message = $this->createMessageWithSubLines($title);
+        $this->loadLogger();
 
         $fullPathToFile = $this->setFullName();
 
         $this->createFileIfNoExists($fullPathToFile);
 
+        if($days)
+            $this->log->useDailyFiles($fullPathToFile,$days);
+        else
+            $this->log->useFiles($fullPathToFile);
 
-        $this->log->useFiles($fullPathToFile);
-        $this->log->write($this->level,$message);
+        $this->writeInLog();
 
         return true;
     }
 
+    private function writeInLog()
+    {
+        $message = $this->concatTitleAndLines();
+
+        $this->log->write($this->level,$message);
+    }
     /**
      * Concar the message with the title and lines
-     * @param $title
      * @return string
      */
-    private function createMessageWithSubLines($title)
+    private function concatTitleAndLines()
     {
-        return "$title\n$this->line";
+        return "$this->title\n$this->line";
     }
 
     /**
@@ -209,6 +213,11 @@ class Log
             return $path . '/';
 
         return $path;
+    }
+
+    private function loadLogger()
+    {
+        $this->log = new Writer(new Logger($this->loggerName));
     }
 
 }
