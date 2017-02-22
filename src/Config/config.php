@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'path' => __DIR__ . '/../storage/log/s',
+    'path' => __DIR__ . '/../storage/logs/',
     'level' => 'info',
     'fileName' => 'info'
 ];

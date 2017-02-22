@@ -19,15 +19,6 @@ composer require edujugon/laravel-log
     )
 ```
 
-##### Let's add the Alias facade, add it to the aliases array.
-
-```
-'aliases' => array(
-        ...
-        'Log' => Edujugon\Log\Facades\Log::class,
-    )
-```
-
 ##### Publish the package's configuration file to the application's own config directory.
 
 ```
