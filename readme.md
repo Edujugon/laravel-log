@@ -46,7 +46,7 @@ Update the `log.php` file with your data.
 - [level](https://github.com/edujugon/laravel-log/#level)
 - [title](https://github.com/edujugon/laravel-log/#title)
 - [line](https://github.com/edujugon/laravel-log/#line)
-- [name](https://github.com/edujugon/laravel-log/#name)
+- [name](https://github.com/edujugon/laravel-log/#logname)
 - [fileName](https://github.com/edujugon/laravel-log/#filename)
 - [write](https://github.com/edujugon/laravel-log/#write)
 
@@ -94,7 +94,7 @@ Edujugon\Log\Log object title($title)
 Edujugon\Log\Log object line($line)
 ```
 
-#### name
+#### logname
 
 `name` method sets the logger name.
 
@@ -118,9 +118,9 @@ Edujugon\Log\Log object name($loggerName)
 Edujugon\Log\Log object fileName($name)
 ```
 
-#### writer
+#### write
 
-`writer` method writes the title and lines in log file.
+`write` method writes the title and lines in log file.
 
 >   If pass the title as parameter it will override the previous value passed by above `title` method.
 
