@@ -139,6 +139,7 @@ $log->fileName('my-personal-log')
     ->line('the record id is 3')
     ->line('Stored by John')
     ->line('This is antoher line')
+    ->days(3)
     ->write();
 ```
 
