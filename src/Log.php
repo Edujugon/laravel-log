@@ -168,7 +168,7 @@ class Log
 
         $fullPathToFile = $this->setFullName();
 
-        $this->createFileIfNoExists($fullPathToFile);
+        $this->createFolderIfNoExists();
 
         if($this->days)
             $this->log->useDailyFiles($fullPathToFile,$this->days);
@@ -199,15 +199,12 @@ class Log
     }
 
     /**
-     * @param $fullPathToFile
+     * Create folder if no exists
      */
-    private function createFileIfNoExists($fullPathToFile)
+    private function createFolderIfNoExists()
     {
         if(!is_dir($this->path))
             mkdir($this->path,0777,true);
-
-        if(!file_exists($fullPathToFile))
-            touch($fullPathToFile);
     }
 
     /**
