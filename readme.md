@@ -124,8 +124,6 @@ Edujugon\Log\Log object days($days)
 
 `write` method writes in log file.
 
->   If passed number of days it will register a daily file log handler.
-
 **Syntax**
 
 ```php
