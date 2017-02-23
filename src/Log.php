@@ -12,7 +12,7 @@ class Log
      * Set the logger name
      * @var string
      */
-    protected $loggerName = 'my-logger';
+    protected $loggerName;
 
     /**
      * File Name
@@ -47,25 +47,30 @@ class Log
     protected $level;
 
     /**
+     * Days to keep the log
+     */
+    protected $days;
+
+    /**
      * @var \Illuminate\Log\Writer
      */
     protected $log;
 
     /**
      * Log constructor.
-     * @param $name
-     * @internal param Writer|null $log
      */
-    function __construct($name = null)
+    function __construct()
     {
 
-        $this->loggerName = $name ? $name : $this->loggerName;
+        $this->loggerName = eConfig()['logger-name'];
 
         $this->path = eConfig()['path'] ;
 
         $this->level = eConfig()['level'];
 
         $this->file = eConfig()['fileName'] . $this->extension;
+
+        $this->days = eConfig()['days'];
 
     }
 
@@ -141,13 +146,23 @@ class Log
         return $this;
     }
 
+    /**
+     * Set amount of files to be kept in server.
+     * @param $days
+     * @return $this
+     */
+    function days($days)
+    {
+        $this->days = $days;
+
+        return $this;
+    }
 
     /**
      * Write in log file.
-     * @param int|null $days
      * @return bool
      */
-    function write($days = 0)
+    function write()
     {
         $this->loadLogger();
 
@@ -155,8 +170,8 @@ class Log
 
         $this->createFileIfNoExists($fullPathToFile);
 
-        if($days)
-            $this->log->useDailyFiles($fullPathToFile,$days);
+        if($this->days)
+            $this->log->useDailyFiles($fullPathToFile,$this->days);
         else
             $this->log->useFiles($fullPathToFile);
 
@@ -165,6 +180,9 @@ class Log
         return true;
     }
 
+    /**
+     * Call write method of \Illuminate\Log\Writer
+     */
     private function writeInLog()
     {
         $message = $this->concatTitleAndLines();
@@ -186,7 +204,7 @@ class Log
     private function createFileIfNoExists($fullPathToFile)
     {
         if(!is_dir($this->path))
-            mkdir($this->path);
+            mkdir($this->path,0777,true);
 
         if(!file_exists($fullPathToFile))
             touch($fullPathToFile);
@@ -215,6 +233,9 @@ class Log
         return $path;
     }
 
+    /**
+     * instance of \Illuminate\Log\Writer
+     */
     private function loadLogger()
     {
         $this->log = new Writer(new Logger($this->loggerName));

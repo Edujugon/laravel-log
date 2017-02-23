@@ -39,6 +39,7 @@ Update the `log.php` file with your data.
 - [line](https://github.com/edujugon/laravel-log/#line)
 - [name](https://github.com/edujugon/laravel-log/#logname)
 - [fileName](https://github.com/edujugon/laravel-log/#filename)
+- [days](https://github.com/edujugon/laravel-log/#days)
 - [write](https://github.com/edujugon/laravel-log/#write)
 
 #### path
@@ -109,6 +110,16 @@ Edujugon\Log\Log object name($loggerName)
 Edujugon\Log\Log object fileName($name)
 ```
 
+#### days
+
+`days` method sets amount of files to be kept in server.
+
+**Syntax**
+
+```php
+Edujugon\Log\Log object days($days)
+```
+
 #### write
 
 `write` method writes in log file.
@@ -118,7 +129,7 @@ Edujugon\Log\Log object fileName($name)
 **Syntax**
 
 ```php
-boolean write($days = 0)
+boolean write()
 ```
 
 ##  Usage samples
