@@ -3,7 +3,7 @@
 return [
 
     //logging context name
-    'logger-name' => 'my-logger',
+    'logger-name' => 'logger',
 
     //Path to store the logs.
     'path' => __DIR__ . '/../storage/logs/',
