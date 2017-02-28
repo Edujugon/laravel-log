@@ -13,7 +13,7 @@
  *
  * @return array
  */
-function eConfig()
+function e_log_config()
 {
     if(function_exists('config_path'))
     {
