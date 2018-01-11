@@ -112,13 +112,14 @@ Edujugon\Log\Log object fileName($name)
 
 #### days
 
-`days` method sets amount of files to be kept in server.
+`days` method sets amount of days to be kept in server.
 
 **Syntax**
 
 ```php
 Edujugon\Log\Log object days($days)
 ```
+> A value "0" means no day limit
 
 #### write
 
