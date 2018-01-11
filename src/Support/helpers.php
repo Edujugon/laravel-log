@@ -1,12 +1,4 @@
 <?php
-/**
- * Project: laravel-log.
- * User: Edujugon
- * Email: edujugon@gmail.com
- * Date: 22/2/17
- * Time: 13:39
- */
-
 
 /**
  * Get configuration array data.
@@ -25,7 +17,6 @@ function e_log_config()
         }
     }
 
-    $configuration = include(__DIR__ . '/../Config/config.php');
+    return include(__DIR__ . '/../Config/config.php');
 
-    return $configuration;
 }
