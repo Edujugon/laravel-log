@@ -10,9 +10,9 @@ class LogTest extends PHPUnit_Framework_TestCase {
     {
         $log = new Log();
         $log->fileName('test')
-            ->title('Log with sublines asdf asdf as df asdf as df asdf asdf as df')
-            ->line('esta es una sublinea')
-            ->line('y esta otra :)')
+            ->title('Edujugon Log title')
+            ->line('First line')
+            ->line('second :)')
             ->write();
     }
 
