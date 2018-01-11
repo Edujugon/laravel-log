@@ -61,16 +61,17 @@ class Log
      */
     function __construct()
     {
+        $config = e_log_config();
 
-        $this->loggerName = e_log_config()['logger-name'];
+        $this->loggerName = $config['logger-name'];
 
-        $this->path = e_log_config()['path'] ;
+        $this->path = $config['path'] ;
 
-        $this->level = e_log_config()['level'];
+        $this->level = $config['level'];
 
-        $this->file = e_log_config()['fileName'] . $this->extension;
+        $this->file = $config['fileName'] . $this->extension;
 
-        $this->days = e_log_config()['days'];
+        $this->days = $config['days'];
 
     }
 
@@ -122,7 +123,7 @@ class Log
     }
 
     /**
-     * Set the logger name
+     * Set the logger name (logging context name)
      * @param $loggerName
      * @return $this
      */
