@@ -178,6 +178,9 @@ class Log
 
         $this->writeInLog();
 
+        $this->title = null;
+        $this->line  = '';
+
         return true;
     }
 
