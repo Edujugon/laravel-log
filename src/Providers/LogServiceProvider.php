@@ -28,7 +28,7 @@ class LogServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(Log::class, function ($app) {
+        $this->app->singleton(Log::class, function ($app) {
             return new Log();
         });
     }
