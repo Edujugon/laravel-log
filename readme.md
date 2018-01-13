@@ -10,7 +10,11 @@ Simple API to write logs for Laravel.
 composer require edujugon/laravel-log
 ```
 
-##### Register the GoogleAds service by adding it to the providers array.
+**Laravel 5.5 or higher?**
+
+Then you don't have to either register or add the alias, this package uses Package Auto-Discovery's feature, and should be available as soon as you install it via Composer.
+
+(Laravel < 5.5) Register the Log service by adding it to the providers array.
 
 ```
 'providers' => array(
