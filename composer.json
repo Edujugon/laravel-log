@@ -24,5 +24,15 @@
             "src/Support/helpers.php"
       ]
     },
+    "extra": {
+      "laravel": {
+        "providers": [
+          "Edujugon\\Log\\Providers\\LogServiceProvider"
+        ],
+        "aliases": {
+          "PushNotification": "Edujugon\\Log\\Facades\\Log"
+        }
+      }
+    },
     "minimum-stability": "dev"
 }
