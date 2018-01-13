@@ -178,8 +178,7 @@ class Log
 
         $this->writeInLog();
 
-        $this->title = null;
-        $this->line  = '';
+        $this->clearInput();
 
         return true;
     }
@@ -240,6 +239,15 @@ class Log
     private function loadLogger()
     {
         $this->log = new Writer(new Logger($this->loggerName));
+    }
+
+    /**
+     * Clear title and line
+     */
+    protected function clearInput()
+    {
+        $this->title = '';
+        $this->line = '';
     }
 
 }
