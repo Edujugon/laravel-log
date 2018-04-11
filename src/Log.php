@@ -1,8 +1,6 @@
 <?php
 namespace Edujugon\Log;
 
-
-use Illuminate\Log\Writer;
 use Monolog\Logger;
 
 class Log
@@ -52,6 +50,12 @@ class Log
     protected $days;
 
     /**
+     * Exclude from the log line
+     * @var array
+     */
+    protected $excludeFromFormat = [];
+
+    /**
      * @var \Illuminate\Log\Writer
      */
     protected $log;
@@ -59,7 +63,7 @@ class Log
     /**
      * Log constructor.
      */
-    function __construct()
+    public function __construct()
     {
         $config = e_log_config();
 
@@ -93,7 +97,7 @@ class Log
      * @param  $level
      * @return $this
      */
-    function level($level)
+    public function level($level)
     {
         $this->level = $level;
 
@@ -104,7 +108,7 @@ class Log
      * @param $title
      * @return $this
      */
-    function title($title)
+    public function title($title)
     {
         $this->title = $title;
 
@@ -115,7 +119,7 @@ class Log
      * @param $line
      * @return $this
      */
-    function line($line)
+    public function line($line)
     {
         $this->line = empty($this->line) ? $line : "$this->line\n$line";
 
@@ -127,7 +131,7 @@ class Log
      * @param $loggerName
      * @return $this
      */
-    function name($loggerName)
+    public function name($loggerName)
     {
         $this->loggerName = $loggerName;
 
@@ -140,7 +144,7 @@ class Log
      * @param $name
      * @return $this
      */
-    function fileName($name)
+    public function fileName($name)
     {
         $this->file = $name . $this->extension;
 
@@ -152,9 +156,29 @@ class Log
      * @param $days
      * @return $this
      */
-    function days($days)
+    public function days($days)
     {
         $this->days = $days;
+
+        return $this;
+    }
+
+    /**
+     * Exclude datetime from log line
+     */
+    public function withoutDateTime()
+    {
+        $this->excludeFromFormat[] = Writer::FORMAT_WITHOUT_DATETIME;
+
+        return $this;
+    }
+
+    /**
+     * Exclude logger details from log line
+     */
+    public function withoutLoggerDetails()
+    {
+        $this->excludeFromFormat[] = Writer::FORMAT_WITHOUT_LOGGER_DETAILS;
 
         return $this;
     }
@@ -163,7 +187,7 @@ class Log
      * Write in log file.
      * @return bool
      */
-    function write()
+    public function write()
     {
         $this->loadLogger();
 
@@ -171,14 +195,16 @@ class Log
 
         $this->createFolderIfNoExists();
 
-        if($this->days)
-            $this->log->useDailyFiles($fullPathToFile,$this->days);
-        else
+        if ($this->days) {
+            $this->log->useDailyFiles($fullPathToFile, $this->days);
+        } else {
             $this->log->useFiles($fullPathToFile);
+        }
 
         $this->writeInLog();
 
         $this->clearInput();
+        $this->clearFormat();
 
         return true;
     }
@@ -190,10 +216,10 @@ class Log
     {
         $message = $this->concatTitleAndLines();
 
-        $this->log->write($this->level,$message);
+        $this->log->write($this->level, $message);
     }
     /**
-     * Concar the message with the title and lines
+     * Concat the message with the title and lines
      * @return string
      */
     private function concatTitleAndLines()
@@ -206,8 +232,9 @@ class Log
      */
     private function createFolderIfNoExists()
     {
-        if(!is_dir($this->path))
-            mkdir($this->path,0777,true);
+        if (!is_dir($this->path)) {
+            mkdir($this->path, 0777, true);
+        }
     }
 
     /**
@@ -227,8 +254,9 @@ class Log
      */
     private function addSlash($path)
     {
-        if(substr($path,-1) != '/')
+        if (substr($path, -1) != '/') {
             return $path . '/';
+        }
 
         return $path;
     }
@@ -239,6 +267,8 @@ class Log
     private function loadLogger()
     {
         $this->log = new Writer(new Logger($this->loggerName));
+
+        $this->log->lineFormat($this->excludeFromFormat);
     }
 
     /**
@@ -248,6 +278,14 @@ class Log
     {
         $this->title = '';
         $this->line = '';
+    }
+
+    /**
+     * Clear the line format to default
+     */
+    protected function clearFormat()
+    {
+        $this->excludeFromFormat = [];
     }
 
 }

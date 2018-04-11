@@ -14,7 +14,7 @@ return [
     //Name of log file
     'fileName' => 'info',
 
-    //amount of days to be kept in server
+    //Amount of days to be kept in server
     // If no days limit set it to "0"
     'days' => 5
 ];

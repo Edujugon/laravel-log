@@ -13,6 +13,8 @@ class LogTest extends PHPUnit_Framework_TestCase {
             ->title('Edujugon Log title')
             ->line('First line')
             ->line('second :)')
+            ->withoutDateTime()
+            ->withoutLoggerDetails()
             ->write();
     }
 
