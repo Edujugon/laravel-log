@@ -44,6 +44,8 @@ Update the `log.php` file with your data.
 - [name](https://github.com/edujugon/laravel-log/#logname)
 - [fileName](https://github.com/edujugon/laravel-log/#filename)
 - [days](https://github.com/edujugon/laravel-log/#days)
+- [withoutDateTime](https://github.com/edujugon/laravel-log/#withoutdatetime)
+- [withoutLoggerDetails](https://github.com/edujugon/laravel-log/#withoutloggerdetails)
 - [write](https://github.com/edujugon/laravel-log/#write)
 
 #### path
@@ -124,6 +126,27 @@ Edujugon\Log\Log object fileName($name)
 Edujugon\Log\Log object days($days)
 ```
 > A value "0" means no day limit
+
+#### withoutDateTime
+
+`withoutDateTime` method excludes datetime from log line.
+
+**Syntax**
+
+```php
+Edujugon\Log\Log object withoutDateTime()
+```
+
+#### withoutLoggerDetails
+
+`withoutLoggerDetails` method excludes logger details from log line.
+
+**Syntax**
+
+```php
+Edujugon\Log\Log object withoutLoggerDetails()
+```
+> Exclude logger name and level
 
 #### write
 
